@@ -4,27 +4,30 @@ import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import java.time.ZonedDateTime;
-import java.util.Set;
 
-@Entity
-@Table(name = "make")
-public class Make extends BaseEntity {
+class Model {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "make_id")
+	@Column(name = "model_id")
 	private int id;
-
-	@OneToMany(mappedBy = "make", targetEntity = Model.class)
-	Set<Model> models;
 
 	@Column(name = "name")
 	private String name;
 
+	@ManyToOne
+	@JoinColumn(name = "make_id", referencedColumnName = "id")
+	private Make make;
+
 	@Column(name = "info", columnDefinition = "TEXT")
 	private String info;
 
-	@Column(name = "founded_at")
+	@Column(name = "production_start")
 	@Type(type = "org.jadira.usertype.dateandtime.threeten.PersistentZonedDateTime")
-	private ZonedDateTime foundedAt;
+	private ZonedDateTime prodctionStart;
+
+	@Column(name = "production_end")
+	@Type(type = "org.jadira.usertype.dateandtime.threeten.PersistentZonedDateTime")
+	private ZonedDateTime productionEnd;
 }
+
