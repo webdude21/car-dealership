@@ -1,4 +1,4 @@
-package eu.webdude;
+package eu.webdude.cardealership;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
