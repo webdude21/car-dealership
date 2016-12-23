@@ -7,4 +7,5 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
 @Constraint(validatedBy = {})
-public @interface PositiveNumber {}
+public @interface PositiveNumber {
+}

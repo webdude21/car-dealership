@@ -1,33 +1,57 @@
 package eu.webdude.cardealership.entity;
 
 import eu.webdude.cardealership.annotation.PositiveNumber;
-import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
-import java.time.ZonedDateTime;
+import java.util.Date;
 
-public class Car {
-
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "car_id")
-	private int id;
+@Entity
+@Table(name = "car")
+public class Car extends BaseEntity {
 
 	@Column(name = "manufactured_at")
-	@Type(type = "org.jadira.usertype.dateandtime.threeten.PersistentZonedDateTime")
-	private ZonedDateTime manufacturedAt;
+	@Temporal(TemporalType.DATE)
+	private Date manufacturedAt;
 
 	@ManyToOne
-	@JoinColumn(name = "make_id", referencedColumnName = "id")
-	private Make make;
-
-	@ManyToOne
-	@NotNull
-	@JoinColumn(name = "model_id", referencedColumnName = "id")
+	@JoinColumn(name = "model_id")
 	private Model model;
 
-	@Column
+	@Column(name = "odometer_reading")
 	@PositiveNumber
 	private Double odometerReading;
+
+	public Car() {
+
+	}
+
+	public Car(double odometerReading, int manufacturedAtYear, Model model) {
+		setOdometerReading(odometerReading);
+		setModel(model);
+		setManufacturedAt(new Date(manufacturedAtYear, 1, 1));
+	}
+
+	public Date getManufacturedAt() {
+		return manufacturedAt;
+	}
+
+	public void setManufacturedAt(Date manufacturedAt) {
+		this.manufacturedAt = manufacturedAt;
+	}
+
+	public Model getModel() {
+		return model;
+	}
+
+	public void setModel(Model model) {
+		this.model = model;
+	}
+
+	public Double getOdometerReading() {
+		return odometerReading;
+	}
+
+	public void setOdometerReading(Double odometerReading) {
+		this.odometerReading = odometerReading;
+	}
 }

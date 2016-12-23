@@ -1,11 +1,21 @@
 package eu.webdude.cardealership.entity;
 
-import org.hibernate.envers.Audited;
-
-import javax.persistence.MappedSuperclass;
+import javax.persistence.*;
 import java.io.Serializable;
 
 @MappedSuperclass
-@Audited
-abstract class BaseEntity implements Serializable {
+public abstract class BaseEntity implements Serializable {
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id")
+	private long id;
+
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
+	}
 }
