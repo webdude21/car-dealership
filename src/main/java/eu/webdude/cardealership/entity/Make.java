@@ -27,9 +27,7 @@ public class Make extends BaseEntity {
 		setFoundedAt(foundedAt);
 	}
 
-	Make() {
-
-	}
+	Make() {}
 
 	public Set<Model> getModels() {
 		return models;

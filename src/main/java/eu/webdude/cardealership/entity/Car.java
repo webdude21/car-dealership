@@ -1,6 +1,6 @@
 package eu.webdude.cardealership.entity;
 
-import eu.webdude.cardealership.annotation.PositiveNumber;
+import eu.webdude.cardealership.constraint.PositiveNumber;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -18,7 +18,7 @@ public class Car extends BaseEntity {
 	private Model model;
 
 	@Column(name = "odometer_reading")
-	@PositiveNumber
+	@PositiveNumber(message = "Odometer reading couldn't really be negative!")
 	private Double odometerReading;
 
 	public Car() {

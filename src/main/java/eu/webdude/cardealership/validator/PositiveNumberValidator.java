@@ -1,6 +1,6 @@
 package eu.webdude.cardealership.validator;
 
-import eu.webdude.cardealership.annotation.PositiveNumber;
+import eu.webdude.cardealership.constraint.PositiveNumber;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
