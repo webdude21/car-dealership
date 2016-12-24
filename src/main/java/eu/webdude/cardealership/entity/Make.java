@@ -5,7 +5,7 @@ import java.util.Date;
 import java.util.Set;
 
 @Entity
-@Table(name = "make")
+@Table(name = "makes")
 public class Make extends BaseEntity {
 
 	@OneToMany(mappedBy = "make", targetEntity = Model.class)
@@ -27,7 +27,8 @@ public class Make extends BaseEntity {
 		setFoundedAt(foundedAt);
 	}
 
-	Make() {}
+	Make() {
+	}
 
 	public Set<Model> getModels() {
 		return models;

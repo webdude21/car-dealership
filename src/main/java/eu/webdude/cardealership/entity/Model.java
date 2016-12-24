@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-@Table(name = "model")
+@Table(name = "models")
 public class Model extends BaseEntity {
 
 	@Column(name = "name")

@@ -6,7 +6,7 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-@Table(name = "car")
+@Table(name = "cars")
 public class Car extends BaseEntity {
 
 	@Column(name = "manufactured_at")
@@ -21,11 +21,16 @@ public class Car extends BaseEntity {
 	@PositiveNumber(message = "Odometer reading couldn't really be negative!")
 	private Double odometerReading;
 
-	public Car() {
+	@Column(name = "status")
+	@Enumerated(EnumType.STRING)
+	private Status status;
 
+	public Car() {
+		this.setStatus(Status.FOR_SALE);
 	}
 
 	public Car(double odometerReading, int manufacturedAtYear, Model model) {
+		this();
 		setOdometerReading(odometerReading);
 		setModel(model);
 		setManufacturedAt(new Date(manufacturedAtYear, 1, 1));
@@ -53,5 +58,13 @@ public class Car extends BaseEntity {
 
 	public void setOdometerReading(Double odometerReading) {
 		this.odometerReading = odometerReading;
+	}
+
+	public Status getStatus() {
+		return status;
+	}
+
+	public void setStatus(Status status) {
+		this.status = status;
 	}
 }
