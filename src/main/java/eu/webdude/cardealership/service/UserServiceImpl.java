@@ -1,7 +1,7 @@
 package eu.webdude.cardealership.service;
 
-import eu.webdude.cardealership.entity.User;
-import eu.webdude.cardealership.entity.UserDetailsImpl;
+import eu.webdude.cardealership.domain.entity.User;
+import eu.webdude.cardealership.domain.entity.UserDetailsImpl;
 import eu.webdude.cardealership.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;

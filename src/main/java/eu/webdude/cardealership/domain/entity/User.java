@@ -1,11 +1,10 @@
-package eu.webdude.cardealership.entity;
+package eu.webdude.cardealership.domain.entity;
 
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
 import java.security.Principal;
-import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -28,8 +27,13 @@ public class User extends BaseEntity implements Principal {
 	@NotEmpty(message = "Password is required.")
 	private String password;
 
-	@ManyToMany(mappedBy = "userroles", fetch = FetchType.EAGER)
-	private Set<Role> roles = new HashSet<>();
+	@ManyToMany
+	@JoinTable(name = "users_roles", joinColumns = @JoinColumn(name = "role_id"),
+		inverseJoinColumns = @JoinColumn(name = "user_id"))
+	private Set<Role> roles;
+
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+	private Set<Car> cars;
 
 	public User() {
 	}
@@ -41,8 +45,7 @@ public class User extends BaseEntity implements Principal {
 		this.setPassword(password);
 	}
 
-	public User(User user) {
-		this.setId(user.getId());
+	User(User user) {
 		this.setFirstName(user.getFirstName());
 		this.setLastName(user.getLastName());
 		this.setEmail(user.getEmail());
@@ -105,5 +108,13 @@ public class User extends BaseEntity implements Principal {
 
 	public void setRoles(Set<Role> roles) {
 		this.roles = roles;
+	}
+
+	public Set<Car> getCars() {
+		return cars;
+	}
+
+	public void setCars(Set<Car> cars) {
+		this.cars = cars;
 	}
 }

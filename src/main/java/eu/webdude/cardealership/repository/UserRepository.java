@@ -1,6 +1,6 @@
 package eu.webdude.cardealership.repository;
 
-import eu.webdude.cardealership.entity.User;
+import eu.webdude.cardealership.domain.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

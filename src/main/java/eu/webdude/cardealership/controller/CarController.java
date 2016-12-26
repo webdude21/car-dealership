@@ -1,6 +1,6 @@
 package eu.webdude.cardealership.controller;
 
-import eu.webdude.cardealership.entity.Car;
+import eu.webdude.cardealership.domain.entity.Car;
 import eu.webdude.cardealership.service.CarService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;

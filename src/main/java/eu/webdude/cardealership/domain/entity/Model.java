@@ -1,4 +1,4 @@
-package eu.webdude.cardealership.entity;
+package eu.webdude.cardealership.domain.entity;
 
 import javax.persistence.*;
 import java.util.Date;

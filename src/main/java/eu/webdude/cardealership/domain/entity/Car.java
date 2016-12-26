@@ -1,4 +1,4 @@
-package eu.webdude.cardealership.entity;
+package eu.webdude.cardealership.domain.entity;
 
 import eu.webdude.cardealership.constraint.PositiveNumber;
 
@@ -16,6 +16,10 @@ public class Car extends BaseEntity {
 	@ManyToOne
 	@JoinColumn(name = "model_id")
 	private Model model;
+
+	@ManyToOne
+	@JoinColumn(name = "user_id")
+	private User user;
 
 	@Column(name = "odometer_reading")
 	@PositiveNumber(message = "Odometer reading couldn't really be negative!")
@@ -66,5 +70,13 @@ public class Car extends BaseEntity {
 
 	public void setStatus(Status status) {
 		this.status = status;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
 	}
 }

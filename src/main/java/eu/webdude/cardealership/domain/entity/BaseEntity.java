@@ -1,4 +1,4 @@
-package eu.webdude.cardealership.entity;
+package eu.webdude.cardealership.domain.entity;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -13,9 +13,5 @@ public abstract class BaseEntity implements Serializable {
 
 	public long getId() {
 		return id;
-	}
-
-	public void setId(long id) {
-		this.id = id;
 	}
 }

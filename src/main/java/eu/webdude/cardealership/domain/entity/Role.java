@@ -1,4 +1,4 @@
-package eu.webdude.cardealership.entity;
+package eu.webdude.cardealership.domain.entity;
 
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.security.core.GrantedAuthority;
@@ -13,8 +13,8 @@ public class Role extends BaseEntity implements GrantedAuthority {
 
 	private static final long serialVersionUID = 1L;
 
-	@ManyToMany(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
-	private Set<User> userroles = new HashSet<User>();
+	@ManyToMany(cascade = {CascadeType.ALL}, mappedBy = "roles")
+	private Set<User> users = new HashSet<>();
 
 	@NotEmpty
 	private String role;
@@ -36,11 +36,11 @@ public class Role extends BaseEntity implements GrantedAuthority {
 	}
 
 	public Set<User> getUsers() {
-		return userroles;
+		return users;
 	}
 
 	public void setUsers(Set<User> users) {
-		this.userroles = users;
+		this.users = users;
 	}
 
 	@Override

@@ -1,8 +1,8 @@
 package eu.webdude.cardealership.service;
 
-import eu.webdude.cardealership.entity.Car;
-import eu.webdude.cardealership.entity.Make;
-import eu.webdude.cardealership.entity.Model;
+import eu.webdude.cardealership.domain.entity.Car;
+import eu.webdude.cardealership.domain.entity.Make;
+import eu.webdude.cardealership.domain.entity.Model;
 import eu.webdude.cardealership.repository.EntityRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

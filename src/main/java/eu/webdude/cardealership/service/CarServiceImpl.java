@@ -1,7 +1,7 @@
 package eu.webdude.cardealership.service;
 
-import eu.webdude.cardealership.entity.Car;
-import eu.webdude.cardealership.entity.Status;
+import eu.webdude.cardealership.domain.entity.Car;
+import eu.webdude.cardealership.domain.entity.Status;
 import eu.webdude.cardealership.repository.CarRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
