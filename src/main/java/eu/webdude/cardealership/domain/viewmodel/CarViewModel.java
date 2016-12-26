@@ -1,5 +1,6 @@
 package eu.webdude.cardealership.domain.viewmodel;
 
+import eu.webdude.cardealership.domain.entity.Car;
 import eu.webdude.cardealership.domain.entity.Color;
 import eu.webdude.cardealership.domain.entity.Status;
 
@@ -17,6 +18,14 @@ public class CarViewModel implements Serializable {
 	private Double odometerReading;
 
 	private Status status;
+
+	public CarViewModel(Car car) {
+		setColor(car.getColor());
+		setStatus(car.getStatus());
+		setManufacturedAt(car.getManufacturedAt());
+		setModel(car.getModel().getName());
+		setOdometerReading(car.getOdometerReading());
+	}
 
 	public Date getManufacturedAt() {
 		return manufacturedAt;
