@@ -1,6 +1,7 @@
 package eu.webdude.cardealership.service;
 
 import eu.webdude.cardealership.domain.entity.Car;
+import eu.webdude.cardealership.domain.entity.Color;
 import eu.webdude.cardealership.domain.entity.Make;
 import eu.webdude.cardealership.domain.entity.Model;
 import eu.webdude.cardealership.repository.EntityRepository;
@@ -29,7 +30,7 @@ public class DatabaseSeedImpl implements DatabaseSeed {
 	public void seed() {
 		Make ford = new Make("Ford", new Date(1903, 6, 16));
 		Model mondeo = new Model("Mondeo", ford, 2001, 2007);
-		Car myCar = new Car(260_000, 2002, mondeo);
+		Car myCar = new Car(260_000, 2002, mondeo, Color.BLUE);
 		makeRepository.saveAndFlush(ford);
 		modelRepository.saveAndFlush(mondeo);
 		carRepository.saveAndFlush(myCar);

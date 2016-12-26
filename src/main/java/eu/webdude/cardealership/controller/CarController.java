@@ -1,6 +1,6 @@
 package eu.webdude.cardealership.controller;
 
-import eu.webdude.cardealership.domain.entity.Car;
+import eu.webdude.cardealership.domain.viewmodel.CarViewModel;
 import eu.webdude.cardealership.service.CarService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,8 +19,7 @@ public class CarController {
 	}
 
 	@RequestMapping(value = "/forsale", method = {RequestMethod.GET})
-	public Iterable<Car> tickets() {
+	public Iterable<CarViewModel> tickets() {
 		return carService.getCarsAvailableForPurchase();
 	}
-
 }

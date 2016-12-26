@@ -2,9 +2,11 @@ package eu.webdude.cardealership.repository;
 
 import eu.webdude.cardealership.domain.entity.Car;
 import eu.webdude.cardealership.domain.entity.Status;
-import org.springframework.data.repository.PagingAndSortingRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface CarRepository extends PagingAndSortingRepository<Car, Long> {
+import java.util.List;
 
-	Iterable<Car> findByStatus(Status status);
+public interface CarRepository extends JpaRepository<Car, Long> {
+
+	List<Car> findByStatus(Status status);
 }

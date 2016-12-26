@@ -21,6 +21,9 @@ public class Car extends BaseEntity {
 	@JoinColumn(name = "user_id")
 	private User user;
 
+	@Column(name = "color")
+	private Color color;
+
 	@Column(name = "odometer_reading")
 	@PositiveNumber(message = "Odometer reading couldn't really be negative!")
 	private Double odometerReading;
@@ -38,6 +41,11 @@ public class Car extends BaseEntity {
 		setOdometerReading(odometerReading);
 		setModel(model);
 		setManufacturedAt(new Date(manufacturedAtYear, 1, 1));
+	}
+
+	public Car(double odometerReading, int manufacturedAtYear, Model model, Color color) {
+		this(odometerReading, manufacturedAtYear, model);
+		setColor(color);
 	}
 
 	public Date getManufacturedAt() {
@@ -78,5 +86,13 @@ public class Car extends BaseEntity {
 
 	public void setUser(User user) {
 		this.user = user;
+	}
+
+	public Color getColor() {
+		return color;
+	}
+
+	public void setColor(Color color) {
+		this.color = color;
 	}
 }

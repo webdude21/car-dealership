@@ -1,7 +1,7 @@
 package eu.webdude.cardealership.service;
 
-import eu.webdude.cardealership.domain.entity.Car;
+import eu.webdude.cardealership.domain.viewmodel.CarViewModel;
 
 public interface CarService {
-	Iterable<Car> getCarsAvailableForPurchase();
+	Iterable<CarViewModel> getCarsAvailableForPurchase();
 }

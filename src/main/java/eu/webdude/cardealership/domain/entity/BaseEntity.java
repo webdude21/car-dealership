@@ -11,6 +11,17 @@ public abstract class BaseEntity implements Serializable {
 	@Column(name = "id")
 	private long id;
 
+	@Column(name = "deleted")
+	private boolean deleted;
+
+	public boolean isDeleted() {
+		return deleted;
+	}
+
+	public void setDeleted(boolean deleted) {
+		this.deleted = deleted;
+	}
+
 	public long getId() {
 		return id;
 	}
