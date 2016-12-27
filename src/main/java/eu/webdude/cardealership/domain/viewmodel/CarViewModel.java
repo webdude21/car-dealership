@@ -3,9 +3,9 @@ package eu.webdude.cardealership.domain.viewmodel;
 import eu.webdude.cardealership.domain.entity.Car;
 import eu.webdude.cardealership.domain.entity.Color;
 import eu.webdude.cardealership.domain.entity.Status;
+import eu.webdude.cardealership.util.DateTimeUtil;
 
 import java.io.Serializable;
-import java.time.format.DateTimeFormatter;
 
 public class CarViewModel implements Serializable {
 
@@ -24,7 +24,7 @@ public class CarViewModel implements Serializable {
 	public CarViewModel(Car car) {
 		setColor(car.getColor());
 		setStatus(car.getStatus());
-		setManufacturedAt(car.getManufacturedAt().format(DateTimeFormatter.ISO_DATE));
+		setManufacturedAt(DateTimeUtil.toDefaultString(car.getManufacturedAt()));
 		setModel(car.getModel().getName());
 		setMake(car.getModel().getMake().getName());
 		setOdometerReading(car.getOdometerReading());
