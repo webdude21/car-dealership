@@ -1,17 +1,17 @@
 package eu.webdude.cardealership.domain.entity;
 
 import eu.webdude.cardealership.constraint.PositiveNumber;
+import eu.webdude.cardealership.util.DateTimeUtil;
 
 import javax.persistence.*;
-import java.util.Date;
+import java.time.ZonedDateTime;
 
 @Entity
 @Table(name = "cars")
 public class Car extends BaseEntity {
 
 	@Column(name = "manufactured_at")
-	@Temporal(TemporalType.DATE)
-	private Date manufacturedAt;
+	private ZonedDateTime manufacturedAt;
 
 	@ManyToOne
 	@JoinColumn(name = "model_id")
@@ -40,7 +40,7 @@ public class Car extends BaseEntity {
 		this();
 		setOdometerReading(odometerReading);
 		setModel(model);
-		setManufacturedAt(new Date(manufacturedAtYear, 1, 1));
+		setManufacturedAt(DateTimeUtil.fromYear(manufacturedAtYear));
 	}
 
 	public Car(double odometerReading, int manufacturedAtYear, Model model, Color color) {
@@ -48,11 +48,11 @@ public class Car extends BaseEntity {
 		setColor(color);
 	}
 
-	public Date getManufacturedAt() {
+	public ZonedDateTime getManufacturedAt() {
 		return manufacturedAt;
 	}
 
-	public void setManufacturedAt(Date manufacturedAt) {
+	public void setManufacturedAt(ZonedDateTime manufacturedAt) {
 		this.manufacturedAt = manufacturedAt;
 	}
 

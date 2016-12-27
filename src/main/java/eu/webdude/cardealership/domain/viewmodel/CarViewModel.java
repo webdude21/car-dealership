@@ -5,11 +5,11 @@ import eu.webdude.cardealership.domain.entity.Color;
 import eu.webdude.cardealership.domain.entity.Status;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.time.format.DateTimeFormatter;
 
 public class CarViewModel implements Serializable {
 
-	private Date manufacturedAt;
+	private String manufacturedAt;
 
 	private String model;
 
@@ -19,21 +19,33 @@ public class CarViewModel implements Serializable {
 
 	private Status status;
 
+	private String make;
+
 	public CarViewModel(Car car) {
 		setColor(car.getColor());
 		setStatus(car.getStatus());
-		setManufacturedAt(car.getManufacturedAt());
+		setManufacturedAt(car.getManufacturedAt().format(DateTimeFormatter.ISO_DATE));
 		setModel(car.getModel().getName());
+		setMake(car.getModel().getMake().getName());
 		setOdometerReading(car.getOdometerReading());
 	}
 
-	public Date getManufacturedAt() {
+	public String getManufacturedAt() {
 		return manufacturedAt;
 	}
 
-	public void setManufacturedAt(Date manufacturedAt) {
+	public void setManufacturedAt(String manufacturedAt) {
 		this.manufacturedAt = manufacturedAt;
 	}
+
+	public String getMake() {
+		return make;
+	}
+
+	public void setMake(String make) {
+		this.make = make;
+	}
+
 
 	public String getModel() {
 		return model;

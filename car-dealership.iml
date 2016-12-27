@@ -100,5 +100,6 @@
     <orderEntry type="library" scope="TEST" name="Maven: org.springframework:spring-test:4.3.4.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.hibernate:hibernate-envers:5.2.4.Final" level="project" />
     <orderEntry type="library" name="Maven: org.jboss.logging:jboss-logging:3.3.0.Final" level="project" />
+    <orderEntry type="library" name="Maven: org.hibernate:hibernate-java8:5.0.11.Final" level="project" />
   </component>
 </module>

@@ -5,10 +5,9 @@ import eu.webdude.cardealership.domain.entity.Color;
 import eu.webdude.cardealership.domain.entity.Make;
 import eu.webdude.cardealership.domain.entity.Model;
 import eu.webdude.cardealership.repository.EntityRepository;
+import eu.webdude.cardealership.util.DateTimeUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.Date;
 
 @Service
 public class DatabaseSeedImpl implements DatabaseSeed {
@@ -28,7 +27,7 @@ public class DatabaseSeedImpl implements DatabaseSeed {
 
 	@Override
 	public void seed() {
-		Make ford = new Make("Ford", new Date(1903, 6, 16));
+		Make ford = new Make("Ford", DateTimeUtil.fromYear(1903));
 		Model mondeo = new Model("Mondeo", ford, 2001, 2007);
 		Car myCar = new Car(260_000, 2002, mondeo, Color.BLUE);
 		makeRepository.saveAndFlush(ford);

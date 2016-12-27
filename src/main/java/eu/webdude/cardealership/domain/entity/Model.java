@@ -1,7 +1,9 @@
 package eu.webdude.cardealership.domain.entity;
 
+import eu.webdude.cardealership.util.DateTimeUtil;
+
 import javax.persistence.*;
-import java.util.Date;
+import java.time.ZonedDateTime;
 
 @Entity
 @Table(name = "models")
@@ -18,22 +20,35 @@ public class Model extends BaseEntity {
 	private String info;
 
 	@Column(name = "production_start")
-	@Temporal(TemporalType.DATE)
-	private Date productionStart;
+	private ZonedDateTime productionStart;
 
 	@Column(name = "production_end")
-	@Temporal(TemporalType.DATE)
-	private Date productionEnd;
+	private ZonedDateTime productionEnd;
 
 	public Model(String name, Make make, int productionStartYear, int productionEndYear) {
 		setName(name);
 		setMake(make);
-		setProductionStart(new Date(productionStartYear));
-		setProductionStart(new Date());
-
+		setProductionStart(DateTimeUtil.fromYear(productionStartYear));
+		setProductionStart(DateTimeUtil.fromYear(productionEndYear));
 	}
 
 	Model() {
+	}
+
+	public ZonedDateTime getProductionStart() {
+		return productionStart;
+	}
+
+	public void setProductionStart(ZonedDateTime productionStart) {
+		this.productionStart = productionStart;
+	}
+
+	public ZonedDateTime getProductionEnd() {
+		return productionEnd;
+	}
+
+	public void setProductionEnd(ZonedDateTime productionEnd) {
+		this.productionEnd = productionEnd;
 	}
 
 	public String getName() {
@@ -58,22 +73,6 @@ public class Model extends BaseEntity {
 
 	public void setInfo(String info) {
 		this.info = info;
-	}
-
-	public Date getProductionStart() {
-		return productionStart;
-	}
-
-	public void setProductionStart(Date productionStart) {
-		this.productionStart = productionStart;
-	}
-
-	public Date getProductionEnd() {
-		return productionEnd;
-	}
-
-	public void setProductionEnd(Date productionEnd) {
-		this.productionEnd = productionEnd;
 	}
 }
 

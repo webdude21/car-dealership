@@ -1,7 +1,10 @@
 package eu.webdude.cardealership.domain.entity;
 
-import javax.persistence.*;
-import java.util.Date;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import java.time.ZonedDateTime;
 import java.util.Set;
 
 @Entity
@@ -19,10 +22,9 @@ public class Make extends BaseEntity {
 	private String info;
 
 	@Column(name = "founded_at")
-	@Temporal(TemporalType.DATE)
-	private Date foundedAt;
+	private ZonedDateTime foundedAt;
 
-	public Make(String name, Date foundedAt) {
+	public Make(String name, ZonedDateTime foundedAt) {
 		setName(name);
 		setFoundedAt(foundedAt);
 	}
@@ -54,11 +56,11 @@ public class Make extends BaseEntity {
 		this.info = info;
 	}
 
-	public Date getFoundedAt() {
+	public ZonedDateTime getFoundedAt() {
 		return foundedAt;
 	}
 
-	public void setFoundedAt(Date foundedAt) {
+	public void setFoundedAt(ZonedDateTime foundedAt) {
 		this.foundedAt = foundedAt;
 	}
 }
