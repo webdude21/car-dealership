@@ -30,7 +30,10 @@ public class DatabaseSeedImpl implements DatabaseSeed {
 		repo.save(ford);
 		repo.save(mondeo);
 		repo.save(fiesta);
+		repo.save(objectFactory.createCar(123_312, 2003, mondeo, Color.GREEN));
 		repo.save(objectFactory.createCar(120_224, 1996, fiesta, Color.CYAN));
-		repo.save(objectFactory.createCar(260_000, 2002, mondeo, Color.BLUE));
+		repo.save(objectFactory.createCar(260_421, 2002, mondeo, Color.BLUE));
+		repo.save(objectFactory.createCar(224_423, 2005, mondeo, Color.BLACK));
+		repo.save(objectFactory.createCar(14_121, 1997, fiesta, Color.RED));
 	}
 }
