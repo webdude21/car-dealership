@@ -15,7 +15,7 @@ public class CarViewModel implements Serializable {
 
 	private Color color;
 
-	private Double odometerReading;
+	private long odometerReading;
 
 	private Status status;
 
@@ -63,11 +63,11 @@ public class CarViewModel implements Serializable {
 		this.color = color;
 	}
 
-	public Double getOdometerReading() {
+	public long getOdometerReading() {
 		return odometerReading;
 	}
 
-	public void setOdometerReading(Double odometerReading) {
+	public void setOdometerReading(long odometerReading) {
 		this.odometerReading = odometerReading;
 	}
 

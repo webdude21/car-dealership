@@ -10,6 +10,8 @@ import java.time.ZonedDateTime;
 @Table(name = "cars")
 public class Car extends BaseEntity {
 
+	private static final String CAR_YEAR_PRODUCTION_VALIDATION = "Model must not be null, and the car manufacture year should be during the models production period!";
+
 	@Column(name = "manufactured_at")
 	private ZonedDateTime manufacturedAt;
 
@@ -26,7 +28,7 @@ public class Car extends BaseEntity {
 
 	@Column(name = "odometer_reading")
 	@PositiveNumber(message = "Odometer reading couldn't really be negative!")
-	private Double odometerReading;
+	private long odometerReading;
 
 	@Column(name = "status")
 	@Enumerated(EnumType.STRING)
@@ -36,16 +38,33 @@ public class Car extends BaseEntity {
 		this.setStatus(Status.FOR_SALE);
 	}
 
-	public Car(double odometerReading, int manufacturedAtYear, Model model) {
+	public Car(long odometerReading, int manufacturedAtYear, Model model) {
 		this();
 		setOdometerReading(odometerReading);
+		validateManufactureYear(manufacturedAtYear, model);
 		setModel(model);
 		setManufacturedAt(DateTimeUtil.fromYear(manufacturedAtYear));
 	}
 
-	public Car(double odometerReading, int manufacturedAtYear, Model model, Color color) {
+	public Car(long odometerReading, int manufacturedAtYear, Model model, Color color) {
 		this(odometerReading, manufacturedAtYear, model);
 		setColor(color);
+	}
+
+	private void validateManufactureYear(int manufacturedAtYear, Model model) {
+		boolean isValid = model != null;
+
+		if (isValid) {
+			if (model.getProductionEnd() == null || model.getProductionStart() == null) {
+				isValid = false;
+			} else if (manufacturedAtYear < model.getProductionStart().getYear() || manufacturedAtYear > model.getProductionEnd().getYear()) {
+				isValid = false;
+			}
+		}
+
+		if (!isValid) {
+			throw new IllegalArgumentException(CAR_YEAR_PRODUCTION_VALIDATION);
+		}
 	}
 
 	public ZonedDateTime getManufacturedAt() {
@@ -64,11 +83,11 @@ public class Car extends BaseEntity {
 		this.model = model;
 	}
 
-	public Double getOdometerReading() {
+	public long getOdometerReading() {
 		return odometerReading;
 	}
 
-	public void setOdometerReading(Double odometerReading) {
+	public void setOdometerReading(long odometerReading) {
 		this.odometerReading = odometerReading;
 	}
 

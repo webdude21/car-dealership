@@ -29,7 +29,7 @@ public class Model extends BaseEntity {
 		setName(name);
 		setMake(make);
 		setProductionStart(DateTimeUtil.fromYear(productionStartYear));
-		setProductionStart(DateTimeUtil.fromYear(productionEndYear));
+		setProductionEnd(DateTimeUtil.fromYear(productionEndYear));
 	}
 
 	Model() {
