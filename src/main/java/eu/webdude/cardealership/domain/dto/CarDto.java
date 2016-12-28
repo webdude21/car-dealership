@@ -1,4 +1,4 @@
-package eu.webdude.cardealership.domain.viewmodel;
+package eu.webdude.cardealership.domain.dto;
 
 import eu.webdude.cardealership.domain.entity.Car;
 import eu.webdude.cardealership.domain.entity.Color;
@@ -7,7 +7,7 @@ import eu.webdude.cardealership.util.DateTimeUtil;
 
 import java.io.Serializable;
 
-public class CarViewModel implements Serializable {
+public class CarDto implements Serializable {
 
 	private String manufacturedAt;
 
@@ -21,7 +21,7 @@ public class CarViewModel implements Serializable {
 
 	private String make;
 
-	public CarViewModel(Car car) {
+	public CarDto(Car car) {
 		setColor(car.getColor());
 		setStatus(car.getStatus());
 		setManufacturedAt(DateTimeUtil.toDefaultString(car.getManufacturedAt()));

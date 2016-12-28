@@ -1,7 +1,10 @@
 package eu.webdude.cardealership.service;
 
-import eu.webdude.cardealership.domain.viewmodel.CarViewModel;
+import eu.webdude.cardealership.domain.dto.CarDto;
+import eu.webdude.cardealership.domain.dto.CreateCarDto;
 
 public interface CarService {
-	Iterable<CarViewModel> getCarsAvailableForPurchase();
+	Iterable<CarDto> getCarsAvailableForPurchase();
+
+	CarDto createCar(CreateCarDto carForCreation);
 }
