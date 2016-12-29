@@ -9,6 +9,7 @@ import eu.webdude.cardealership.domain.factory.DomainObjectFactory;
 import eu.webdude.cardealership.repository.CarRepository;
 import eu.webdude.cardealership.repository.ModelRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
@@ -31,6 +32,7 @@ public class CarServiceImpl implements CarService {
 	}
 
 	@Override
+	@Cacheable("getCarsByStatus")
 	public Iterable<CarDto> getCarsByStatus(Status status) {
 		return carRepo.findByStatus(status)
 			.stream()
@@ -47,6 +49,7 @@ public class CarServiceImpl implements CarService {
 	}
 
 	@Override
+	@Cacheable("getCarById")
 	public CarDto getCar(long id) {
 		Car car = carRepo.findOne(id);
 		checkIfCarExists(id, car);
