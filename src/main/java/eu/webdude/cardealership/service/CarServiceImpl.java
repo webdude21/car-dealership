@@ -13,9 +13,11 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
+import javax.transaction.Transactional;
 import java.util.stream.Collectors;
 
 @Service
+@Transactional
 public class CarServiceImpl implements CarService {
 
 	private CarRepository carRepo;
