@@ -1,5 +1,6 @@
 package eu.webdude.cardealership.domain.entity;
 
+import org.hibernate.envers.Audited;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
 
@@ -9,6 +10,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "users")
+@Audited
 public class User extends BaseEntity implements Principal {
 
 	private static final long serialVersionUID = -1525848083627501220L;

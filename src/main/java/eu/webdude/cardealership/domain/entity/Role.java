@@ -1,5 +1,6 @@
 package eu.webdude.cardealership.domain.entity;
 
+import org.hibernate.envers.Audited;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.security.core.GrantedAuthority;
 
@@ -12,6 +13,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "roles")
+@Audited
 public class Role extends BaseEntity implements GrantedAuthority {
 
 	private static final long serialVersionUID = 1L;

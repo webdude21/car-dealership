@@ -8,5 +8,5 @@ import java.util.List;
 
 public interface CarRepository extends JpaRepository<Car, Long> {
 
-	List<Car> findByStatus(Status status);
+	List<Car> findByStatusAndDeletedIsFalse(Status status);
 }

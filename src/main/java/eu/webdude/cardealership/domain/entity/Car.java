@@ -2,12 +2,14 @@ package eu.webdude.cardealership.domain.entity;
 
 import eu.webdude.cardealership.constraint.PositiveNumber;
 import eu.webdude.cardealership.util.DateTimeUtil;
+import org.hibernate.envers.Audited;
 
 import javax.persistence.*;
 import java.time.ZonedDateTime;
 
 @Entity
 @Table(name = "cars")
+@Audited
 public class Car extends BaseEntity {
 
 	private static final String CAR_YEAR_PRODUCTION_VALIDATION = "Model must not be null, and the car manufacture year should be during the models production period!";

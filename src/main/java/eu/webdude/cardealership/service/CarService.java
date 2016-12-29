@@ -9,5 +9,7 @@ public interface CarService {
 
 	CarDto getCar(long id);
 
+	void deleteCar(long id);
+
 	Iterable<CarDto> getCarsByStatus(Status status);
 }

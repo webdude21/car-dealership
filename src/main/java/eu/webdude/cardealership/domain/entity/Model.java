@@ -1,12 +1,14 @@
 package eu.webdude.cardealership.domain.entity;
 
 import eu.webdude.cardealership.util.DateTimeUtil;
+import org.hibernate.envers.Audited;
 
 import javax.persistence.*;
 import java.time.ZonedDateTime;
 
 @Entity
 @Table(name = "models")
+@Audited
 public class Model extends BaseEntity {
 
 	@Column(name = "name")

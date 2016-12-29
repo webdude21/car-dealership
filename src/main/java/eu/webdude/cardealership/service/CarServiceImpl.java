@@ -32,7 +32,7 @@ public class CarServiceImpl implements CarService {
 
 	@Override
 	public Iterable<CarDto> getCarsByStatus(Status status) {
-		return carRepo.findByStatus(status)
+		return carRepo.findByStatusAndDeletedIsFalse(status)
 			.stream()
 			.map(CarDto::new)
 			.collect(Collectors.toList());
@@ -51,6 +51,11 @@ public class CarServiceImpl implements CarService {
 		Car car = carRepo.findOne(id);
 		checkIfCarExists(id, car);
 		return new CarDto(car);
+	}
+
+	@Override
+	public void deleteCar(long id) {
+		carRepo.delete(id);
 	}
 
 	private void checkIfModelExists(String modelName, Model model) {

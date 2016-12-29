@@ -3,6 +3,7 @@ package eu.webdude.cardealership.controller;
 import eu.webdude.cardealership.domain.dto.CarDto;
 import eu.webdude.cardealership.domain.dto.CreateCarDto;
 import eu.webdude.cardealership.domain.entity.Status;
+import eu.webdude.cardealership.errorhandling.ResponseMessage;
 import eu.webdude.cardealership.service.CarService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -28,6 +29,12 @@ public class CarController {
 	@RequestMapping(value = "/list", method = {RequestMethod.GET})
 	public Iterable<CarDto> carsByStatus(@RequestParam(required = false, defaultValue = "FOR_SALE") Status status) {
 		return carService.getCarsByStatus(status);
+	}
+
+	@RequestMapping(value = "/{id}", method = {RequestMethod.DELETE})
+	public ResponseEntity<ResponseMessage> deleteCar(@PathVariable long id) {
+		carService.deleteCar(id);
+		return new ResponseEntity<>(new ResponseMessage("Car has been successfully deleted."), HttpStatus.ACCEPTED);
 	}
 
 	@RequestMapping(value = "/add", method = {RequestMethod.POST})

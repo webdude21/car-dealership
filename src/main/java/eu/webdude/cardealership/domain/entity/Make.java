@@ -1,5 +1,7 @@
 package eu.webdude.cardealership.domain.entity;
 
+import org.hibernate.envers.Audited;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
@@ -9,6 +11,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "makes")
+@Audited
 public class Make extends BaseEntity {
 
 	@OneToMany(mappedBy = "make", targetEntity = Model.class)
