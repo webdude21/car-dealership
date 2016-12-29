@@ -1,4 +1,4 @@
-package eu.webdude.cardealership.controller;
+package eu.webdude.cardealership.interceptor;
 
 import eu.webdude.cardealership.errorhandling.ResponseMessage;
 import org.springframework.http.HttpStatus;

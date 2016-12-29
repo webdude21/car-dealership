@@ -32,7 +32,7 @@ public class CarServiceImpl implements CarService {
 
 	@Override
 	public Iterable<CarDto> getCarsByStatus(Status status) {
-		return carRepo.findByStatusAndDeletedIsFalse(status)
+		return carRepo.findByStatus(status)
 			.stream()
 			.map(CarDto::new)
 			.collect(Collectors.toList());
