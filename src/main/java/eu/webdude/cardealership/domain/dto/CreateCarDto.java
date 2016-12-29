@@ -7,6 +7,16 @@ import java.io.Serializable;
 
 public class CreateCarDto implements Serializable {
 
+	private int manufacturedAtYear;
+
+	private String modelName;
+
+	private Color color;
+
+	private long odometerReading;
+
+	private Status status;
+
 	public int getManufacturedAtYear() {
 		return manufacturedAtYear;
 	}
@@ -46,14 +56,4 @@ public class CreateCarDto implements Serializable {
 	public void setStatus(Status status) {
 		this.status = status;
 	}
-
-	private int manufacturedAtYear;
-
-	private String modelName;
-
-	private Color color;
-
-	private long odometerReading;
-
-	private Status status;
 }

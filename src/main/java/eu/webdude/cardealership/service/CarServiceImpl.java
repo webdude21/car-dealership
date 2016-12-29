@@ -11,6 +11,7 @@ import eu.webdude.cardealership.repository.ModelRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityNotFoundException;
 import java.util.stream.Collectors;
 
 @Service
@@ -40,7 +41,27 @@ public class CarServiceImpl implements CarService {
 	@Override
 	public CarDto createCar(CreateCarDto carForCreation) {
 		Model model = modelRepo.findByNameEquals(carForCreation.getModelName());
+		checkIfModelExists(carForCreation.getModelName(), model);
 		Car createdCar = carRepo.save(domainObjectFactory.createCar(carForCreation, model));
 		return new CarDto(createdCar);
+	}
+
+	@Override
+	public CarDto getCar(long id) {
+		Car car = carRepo.findOne(id);
+		checkIfCarExists(id, car);
+		return new CarDto(car);
+	}
+
+	private void checkIfModelExists(String modelName, Model model) {
+		if (model == null) {
+			throw new EntityNotFoundException(String.format("No car with the name '%s' exists. Please create one first", modelName));
+		}
+	}
+
+	private void checkIfCarExists(long id, Car car) {
+		if (car == null) {
+			throw new EntityNotFoundException(String.format("No car with id '%d' can be found", id));
+		}
 	}
 }

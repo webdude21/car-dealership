@@ -6,10 +6,7 @@ import eu.webdude.cardealership.service.CarService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping(value = "cars")
@@ -20,6 +17,11 @@ public class CarController {
 	@Autowired
 	CarController(CarService carService) {
 		this.carService = carService;
+	}
+
+	@RequestMapping(value = "/{id}", method = {RequestMethod.GET})
+	public CarDto getCar(@PathVariable long id) {
+		return carService.getCar(id);
 	}
 
 	@RequestMapping(value = "/forsale", method = {RequestMethod.GET})

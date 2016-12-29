@@ -7,4 +7,6 @@ public interface CarService {
 	Iterable<CarDto> getCarsAvailableForPurchase();
 
 	CarDto createCar(CreateCarDto carForCreation);
+
+	CarDto getCar(long id);
 }
