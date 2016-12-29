@@ -2,6 +2,7 @@ package eu.webdude.cardealership.controller;
 
 import eu.webdude.cardealership.domain.dto.CarDto;
 import eu.webdude.cardealership.domain.dto.CreateCarDto;
+import eu.webdude.cardealership.domain.entity.Status;
 import eu.webdude.cardealership.service.CarService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -24,9 +25,9 @@ public class CarController {
 		return carService.getCar(id);
 	}
 
-	@RequestMapping(value = "/forsale", method = {RequestMethod.GET})
-	public Iterable<CarDto> tickets() {
-		return carService.getCarsAvailableForPurchase();
+	@RequestMapping(value = "/list", method = {RequestMethod.GET})
+	public Iterable<CarDto> carsByStatus(@RequestParam(required = false, defaultValue = "FOR_SALE") Status status) {
+		return carService.getCarsByStatus(status);
 	}
 
 	@RequestMapping(value = "/add", method = {RequestMethod.POST})

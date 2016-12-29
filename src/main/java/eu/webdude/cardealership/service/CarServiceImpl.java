@@ -31,8 +31,8 @@ public class CarServiceImpl implements CarService {
 	}
 
 	@Override
-	public Iterable<CarDto> getCarsAvailableForPurchase() {
-		return carRepo.findByStatus(Status.FOR_SALE)
+	public Iterable<CarDto> getCarsByStatus(Status status) {
+		return carRepo.findByStatus(status)
 			.stream()
 			.map(CarDto::new)
 			.collect(Collectors.toList());
