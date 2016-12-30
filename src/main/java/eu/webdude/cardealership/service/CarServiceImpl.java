@@ -1,11 +1,11 @@
 package eu.webdude.cardealership.service;
 
 import eu.webdude.cardealership.domain.dto.CarDto;
-import eu.webdude.cardealership.domain.dto.CreateCarDto;
+import eu.webdude.cardealership.domain.dto.InputCarDto;
 import eu.webdude.cardealership.domain.entity.Car;
 import eu.webdude.cardealership.domain.entity.Model;
 import eu.webdude.cardealership.domain.entity.Status;
-import eu.webdude.cardealership.domain.factory.DomainObjectFactory;
+import eu.webdude.cardealership.domain.factory.CarFactory;
 import eu.webdude.cardealership.repository.CarRepository;
 import eu.webdude.cardealership.repository.ModelRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,13 +24,13 @@ public class CarServiceImpl implements CarService {
 
 	private ModelRepository modelRepo;
 
-	private DomainObjectFactory domainObjectFactory;
+	private CarFactory carFactory;
 
 	@Autowired
-	public CarServiceImpl(CarRepository carRepo, ModelRepository modelRepo, DomainObjectFactory domainObjectFactory) {
+	public CarServiceImpl(CarRepository carRepo, ModelRepository modelRepo, CarFactory carFactory) {
 		this.carRepo = carRepo;
 		this.modelRepo = modelRepo;
-		this.domainObjectFactory = domainObjectFactory;
+		this.carFactory = carFactory;
 	}
 
 	@Override
@@ -43,19 +43,26 @@ public class CarServiceImpl implements CarService {
 	}
 
 	@Override
-	public CarDto createCar(CreateCarDto carForCreation) {
+	public void editCar(long id, InputCarDto editedCar) {
+		checkIfCarExists(id);
+		Model model = modelRepo.findByNameEquals(editedCar.getModelName());
+		checkIfModelExists(editedCar.getModelName(), model);
+		carRepo.save(carFactory.createCar(id, editedCar, model));
+	}
+
+	@Override
+	public CarDto createCar(InputCarDto carForCreation) {
 		Model model = modelRepo.findByNameEquals(carForCreation.getModelName());
 		checkIfModelExists(carForCreation.getModelName(), model);
-		Car createdCar = carRepo.save(domainObjectFactory.createCar(carForCreation, model));
+		Car createdCar = carRepo.save(carFactory.createCar(carForCreation, model));
 		return new CarDto(createdCar);
 	}
 
 	@Override
 	@Cacheable("getCarById")
 	public CarDto getCar(long id) {
-		Car car = carRepo.findOne(id);
-		checkIfCarExists(id, car);
-		return new CarDto(car);
+		checkIfCarExists(id);
+		return new CarDto(carRepo.findOne(id));
 	}
 
 	@Override
@@ -69,8 +76,8 @@ public class CarServiceImpl implements CarService {
 		}
 	}
 
-	private void checkIfCarExists(long id, Car car) {
-		if (car == null) {
+	private void checkIfCarExists(long id) {
+		if (!carRepo.exists(id)) {
 			throw new EntityNotFoundException(String.format("No car with id '%d' can be found", id));
 		}
 	}

@@ -5,7 +5,7 @@ import eu.webdude.cardealership.domain.entity.Status;
 
 import java.io.Serializable;
 
-public class CreateCarDto implements Serializable {
+public class InputCarDto implements Serializable {
 
 	private int manufacturedAtYear;
 

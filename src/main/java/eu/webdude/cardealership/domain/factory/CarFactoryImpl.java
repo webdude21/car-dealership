@@ -1,6 +1,6 @@
 package eu.webdude.cardealership.domain.factory;
 
-import eu.webdude.cardealership.domain.dto.CreateCarDto;
+import eu.webdude.cardealership.domain.dto.InputCarDto;
 import eu.webdude.cardealership.domain.entity.Car;
 import eu.webdude.cardealership.domain.entity.Color;
 import eu.webdude.cardealership.domain.entity.Make;
@@ -9,7 +9,7 @@ import eu.webdude.cardealership.util.DateTimeUtil;
 import org.springframework.stereotype.Component;
 
 @Component
-public class DomainObjectFactoryImpl implements DomainObjectFactory {
+public class CarFactoryImpl implements CarFactory {
 
 	@Override
 	public Car createCar(long odometerReading, int yearOfManufacture, Model model, Color color) {
@@ -17,8 +17,22 @@ public class DomainObjectFactoryImpl implements DomainObjectFactory {
 	}
 
 	@Override
-	public Car createCar(CreateCarDto carDto, Model model) {
+	public Car createCar(InputCarDto carDto, Model model) {
 		return createCar(carDto.getOdometerReading(), carDto.getManufacturedAtYear(), model, carDto.getColor());
+	}
+
+	@Override
+	public Car createCar(long id, InputCarDto carDto, Model model) {
+		Car resultCar = createCar(carDto, model);
+		resultCar.setId(id);
+		return resultCar;
+	}
+
+	@Override
+	public Car createCar(long id, long odometerReading, int yearOfManufacture, Model model, Color color) {
+		Car resultCar = createCar(odometerReading, yearOfManufacture, model, color);
+		resultCar.setId(id);
+		return resultCar;
 	}
 
 	@Override

@@ -1,7 +1,7 @@
 package eu.webdude.cardealership.controller;
 
 import eu.webdude.cardealership.domain.dto.CarDto;
-import eu.webdude.cardealership.domain.dto.CreateCarDto;
+import eu.webdude.cardealership.domain.dto.InputCarDto;
 import eu.webdude.cardealership.domain.entity.Status;
 import eu.webdude.cardealership.errorhandling.ResponseMessage;
 import eu.webdude.cardealership.service.CarService;
@@ -26,6 +26,12 @@ public class CarController {
 		return carService.getCar(id);
 	}
 
+	@RequestMapping(value = "/{id}", method = {RequestMethod.PUT})
+	public ResponseEntity<ResponseMessage> editCar(@PathVariable long id, @RequestBody InputCarDto carForCreation) {
+		carService.editCar(id, carForCreation);
+		return new ResponseEntity<>(new ResponseMessage("Car has been successfully updated."), HttpStatus.ACCEPTED);
+	}
+
 	@RequestMapping(value = "/list", method = {RequestMethod.GET})
 	public Iterable<CarDto> carsByStatus(@RequestParam(required = false, defaultValue = "FOR_SALE") Status status) {
 		return carService.getCarsByStatus(status);
@@ -38,7 +44,7 @@ public class CarController {
 	}
 
 	@RequestMapping(value = "/add", method = {RequestMethod.POST})
-	public ResponseEntity<CarDto> add(@RequestBody CreateCarDto carForCreation) {
+	public ResponseEntity<CarDto> add(@RequestBody InputCarDto carForCreation) {
 		return new ResponseEntity<>(carService.createCar(carForCreation), HttpStatus.CREATED);
 	}
 }

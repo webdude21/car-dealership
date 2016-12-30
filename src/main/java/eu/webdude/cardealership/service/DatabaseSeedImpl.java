@@ -4,7 +4,7 @@ import eu.webdude.cardealership.domain.entity.BaseEntity;
 import eu.webdude.cardealership.domain.entity.Color;
 import eu.webdude.cardealership.domain.entity.Make;
 import eu.webdude.cardealership.domain.entity.Model;
-import eu.webdude.cardealership.domain.factory.DomainObjectFactory;
+import eu.webdude.cardealership.domain.factory.CarFactory;
 import eu.webdude.cardealership.repository.EntityRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,10 +17,10 @@ public class DatabaseSeedImpl implements DatabaseSeed {
 
 	private final EntityRepository<BaseEntity> repo;
 
-	private final DomainObjectFactory objectFactory;
+	private final CarFactory objectFactory;
 
 	@Autowired
-	DatabaseSeedImpl(EntityRepository<BaseEntity> baseEntity, DomainObjectFactory objectFactory) {
+	DatabaseSeedImpl(EntityRepository<BaseEntity> baseEntity, CarFactory objectFactory) {
 		this.repo = baseEntity;
 		this.objectFactory = objectFactory;
 	}
