@@ -1,5 +1,6 @@
 package eu.webdude.cardealership.domain.factory;
 
+import eu.webdude.cardealership.domain.dto.CarDto;
 import eu.webdude.cardealership.domain.dto.InputCarDto;
 import eu.webdude.cardealership.domain.entity.Car;
 import eu.webdude.cardealership.domain.entity.Color;
@@ -33,6 +34,11 @@ public class CarFactoryImpl implements CarFactory {
 		Car resultCar = createCar(odometerReading, yearOfManufacture, model, color);
 		resultCar.setId(id);
 		return resultCar;
+	}
+
+	@Override
+	public CarDto createCarDto(Car car) {
+		return new CarDto(car);
 	}
 
 	@Override

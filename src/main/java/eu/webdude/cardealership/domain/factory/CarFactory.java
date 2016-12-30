@@ -1,5 +1,6 @@
 package eu.webdude.cardealership.domain.factory;
 
+import eu.webdude.cardealership.domain.dto.CarDto;
 import eu.webdude.cardealership.domain.dto.InputCarDto;
 import eu.webdude.cardealership.domain.entity.Car;
 import eu.webdude.cardealership.domain.entity.Color;
@@ -14,6 +15,8 @@ public interface CarFactory {
 	Car createCar(long id, InputCarDto carDto, Model model);
 
 	Car createCar(long id, long odometerReading, int yearOfManufacture, Model model, Color color);
+
+	CarDto createCarDto(Car car);
 
 	Make crateMake(String makeName, int foundingYear);
 

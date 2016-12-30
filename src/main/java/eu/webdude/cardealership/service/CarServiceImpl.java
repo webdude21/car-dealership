@@ -38,7 +38,7 @@ public class CarServiceImpl implements CarService {
 	public Iterable<CarDto> getCarsByStatus(Status status) {
 		return carRepo.findByStatus(status)
 			.stream()
-			.map(CarDto::new)
+			.map(carFactory::createCarDto)
 			.collect(Collectors.toList());
 	}
 
@@ -55,14 +55,14 @@ public class CarServiceImpl implements CarService {
 		Model model = modelRepo.findByNameEquals(carForCreation.getModelName());
 		checkIfModelExists(carForCreation.getModelName(), model);
 		Car createdCar = carRepo.save(carFactory.createCar(carForCreation, model));
-		return new CarDto(createdCar);
+		return carFactory.createCarDto(createdCar);
 	}
 
 	@Override
 	@Cacheable("getCarById")
 	public CarDto getCar(long id) {
 		checkIfCarExists(id);
-		return new CarDto(carRepo.findOne(id));
+		return carFactory.createCarDto(carRepo.findOne(id));
 	}
 
 	@Override
