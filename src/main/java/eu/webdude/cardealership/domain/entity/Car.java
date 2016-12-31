@@ -53,22 +53,6 @@ public class Car extends BaseEntity {
 		setColor(color);
 	}
 
-	private void validateManufactureYear(int manufacturedAtYear, Model model) {
-		boolean isValid = model != null;
-
-		if (isValid) {
-			if (model.getProductionEnd() == null || model.getProductionStart() == null) {
-				isValid = false;
-			} else if (manufacturedAtYear < model.getProductionStart().getYear() || manufacturedAtYear > model.getProductionEnd().getYear()) {
-				isValid = false;
-			}
-		}
-
-		if (!isValid) {
-			throw new IllegalArgumentException(CAR_YEAR_PRODUCTION_VALIDATION);
-		}
-	}
-
 	public ZonedDateTime getManufacturedAt() {
 		return manufacturedAt;
 	}
@@ -115,5 +99,21 @@ public class Car extends BaseEntity {
 
 	public void setColor(Color color) {
 		this.color = color;
+	}
+
+	private void validateManufactureYear(int manufacturedAtYear, Model model) {
+		boolean isValid = model != null;
+
+		if (isValid) {
+			if (model.getProductionEnd() == null || model.getProductionStart() == null) {
+				isValid = false;
+			} else if (manufacturedAtYear < model.getProductionStart().getYear() || manufacturedAtYear > model.getProductionEnd().getYear()) {
+				isValid = false;
+			}
+		}
+
+		if (!isValid) {
+			throw new IllegalArgumentException(CAR_YEAR_PRODUCTION_VALIDATION);
+		}
 	}
 }
