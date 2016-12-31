@@ -51,11 +51,10 @@ public class CarServiceImpl implements CarService {
 	}
 
 	@Override
-	public CarDto createCar(InputCarDto carForCreation) {
+	public Car createCar(InputCarDto carForCreation) {
 		Model model = modelRepo.findByNameEquals(carForCreation.getModelName());
 		checkIfModelExists(carForCreation.getModelName(), model);
-		Car createdCar = carRepo.save(carFactory.createCar(carForCreation, model));
-		return carFactory.createCarDto(createdCar);
+		return carRepo.save(carFactory.createCar(carForCreation, model));
 	}
 
 	@Override

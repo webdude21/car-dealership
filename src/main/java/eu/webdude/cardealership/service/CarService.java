@@ -2,10 +2,11 @@ package eu.webdude.cardealership.service;
 
 import eu.webdude.cardealership.domain.dto.CarDto;
 import eu.webdude.cardealership.domain.dto.InputCarDto;
+import eu.webdude.cardealership.domain.entity.Car;
 import eu.webdude.cardealership.domain.entity.Status;
 
 public interface CarService {
-	CarDto createCar(InputCarDto carForCreation);
+	Car createCar(InputCarDto carForCreation);
 
 	CarDto getCar(long id);
 

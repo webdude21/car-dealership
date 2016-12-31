@@ -2,13 +2,16 @@ package eu.webdude.cardealership.controller;
 
 import eu.webdude.cardealership.domain.dto.CarDto;
 import eu.webdude.cardealership.domain.dto.InputCarDto;
+import eu.webdude.cardealership.domain.entity.Car;
 import eu.webdude.cardealership.domain.entity.Status;
 import eu.webdude.cardealership.errorhandling.ResponseMessage;
 import eu.webdude.cardealership.service.CarService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.util.UriComponentsBuilder;
 
 @RestController
 @RequestMapping(value = "cars")
@@ -44,7 +47,14 @@ public class CarController {
 	}
 
 	@RequestMapping(value = "/add", method = {RequestMethod.POST})
-	public ResponseEntity<CarDto> add(@RequestBody InputCarDto carForCreation) {
-		return new ResponseEntity<>(carService.createCar(carForCreation), HttpStatus.CREATED);
+	public ResponseEntity add(@RequestBody InputCarDto carForCreation, UriComponentsBuilder ucBuilder) {
+		Car createdCar = carService.createCar(carForCreation);
+		return new ResponseEntity(getHttpHeadersForCar(ucBuilder, createdCar), HttpStatus.CREATED);
+	}
+
+	private HttpHeaders getHttpHeadersForCar(UriComponentsBuilder ucBuilder, Car createdCar) {
+		HttpHeaders headers = new HttpHeaders();
+		headers.setLocation(ucBuilder.path("/cars/{id}").buildAndExpand(createdCar.getId()).toUri());
+		return headers;
 	}
 }
