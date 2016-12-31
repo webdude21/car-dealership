@@ -8,10 +8,10 @@ import eu.webdude.cardealership.domain.entity.Status;
 import eu.webdude.cardealership.domain.factory.CarFactory;
 import eu.webdude.cardealership.repository.CarRepository;
 import eu.webdude.cardealership.repository.ModelRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
+import javax.inject.Inject;
 import javax.persistence.EntityNotFoundException;
 import javax.transaction.Transactional;
 import java.util.stream.Collectors;
@@ -26,7 +26,7 @@ public class CarServiceImpl implements CarService {
 
 	private CarFactory carFactory;
 
-	@Autowired
+	@Inject
 	public CarServiceImpl(CarRepository carRepo, ModelRepository modelRepo, CarFactory carFactory) {
 		this.carRepo = carRepo;
 		this.modelRepo = modelRepo;

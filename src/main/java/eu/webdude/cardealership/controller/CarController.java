@@ -6,12 +6,13 @@ import eu.webdude.cardealership.domain.entity.Car;
 import eu.webdude.cardealership.domain.entity.Status;
 import eu.webdude.cardealership.errorhandling.ResponseMessage;
 import eu.webdude.cardealership.service.CarService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
+
+import javax.inject.Inject;
 
 @RestController
 @RequestMapping(value = "cars")
@@ -19,7 +20,7 @@ public class CarController {
 
 	private CarService carService;
 
-	@Autowired
+	@Inject
 	CarController(CarService carService) {
 		this.carService = carService;
 	}

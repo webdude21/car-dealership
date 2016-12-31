@@ -1,17 +1,18 @@
 package eu.webdude.cardealership;
 
 import eu.webdude.cardealership.service.DatabaseSeed;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+import javax.inject.Inject;
 
 @SpringBootApplication
 public class CarDealershipApplication implements CommandLineRunner {
 
 	private final DatabaseSeed databaseSeed;
 
-	@Autowired
+	@Inject
 	public CarDealershipApplication(DatabaseSeed databaseSeed) {
 		this.databaseSeed = databaseSeed;
 	}

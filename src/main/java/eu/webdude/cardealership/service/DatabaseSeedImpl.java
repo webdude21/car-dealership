@@ -6,9 +6,9 @@ import eu.webdude.cardealership.domain.entity.Make;
 import eu.webdude.cardealership.domain.entity.Model;
 import eu.webdude.cardealership.domain.factory.CarFactory;
 import eu.webdude.cardealership.repository.EntityRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.inject.Inject;
 import javax.transaction.Transactional;
 
 @Service
@@ -19,7 +19,7 @@ public class DatabaseSeedImpl implements DatabaseSeed {
 
 	private final CarFactory objectFactory;
 
-	@Autowired
+	@Inject
 	DatabaseSeedImpl(EntityRepository<BaseEntity> baseEntity, CarFactory objectFactory) {
 		this.repo = baseEntity;
 		this.objectFactory = objectFactory;
