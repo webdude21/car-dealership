@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 @Component
-class LoggingInterceptor extends HandlerInterceptorAdapter {
+public class LoggingInterceptor extends HandlerInterceptorAdapter {
 
 	private static final Logger log = LoggerFactory.getLogger(LoggingInterceptor.class);
 

@@ -6,8 +6,6 @@
 target/
 .idea/
 
-car-dealership.iml
-
 # Package Files #
 *.jar
 *.war

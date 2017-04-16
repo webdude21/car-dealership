@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import javax.inject.Inject;
+import java.util.concurrent.ExecutionException;
 
 @RestController
 @RequestMapping(value = "cars")
@@ -37,8 +38,8 @@ public class CarController {
 	}
 
 	@RequestMapping(value = "/list", method = {RequestMethod.GET})
-	public Iterable<CarDto> carsByStatus(@RequestParam(required = false, defaultValue = "FOR_SALE") Status status) {
-		return carService.getCarsByStatus(status);
+	public Iterable<CarDto> carsByStatus(@RequestParam(required = false, defaultValue = "FOR_SALE") Status status) throws ExecutionException, InterruptedException {
+		return carService.getCarsByStatus(status).get();
 	}
 
 	@RequestMapping(value = "/{id}", method = {RequestMethod.DELETE})

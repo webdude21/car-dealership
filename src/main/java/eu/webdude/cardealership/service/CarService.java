@@ -5,6 +5,8 @@ import eu.webdude.cardealership.domain.dto.InputCarDto;
 import eu.webdude.cardealership.domain.entity.Car;
 import eu.webdude.cardealership.domain.entity.Status;
 
+import java.util.concurrent.Future;
+
 public interface CarService {
 	Car createCar(InputCarDto carForCreation);
 
@@ -12,7 +14,7 @@ public interface CarService {
 
 	void deleteCar(long id);
 
-	Iterable<CarDto> getCarsByStatus(Status status);
+	Future<Iterable<CarDto>> getCarsByStatus(Status status);
 
 	void editCar(long id, InputCarDto carToEdit);
 }
