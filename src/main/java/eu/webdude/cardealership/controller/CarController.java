@@ -14,7 +14,6 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import javax.inject.Inject;
 import java.util.concurrent.Callable;
-import java.util.concurrent.ExecutionException;
 
 @RestController
 @RequestMapping(value = "cars")
@@ -39,7 +38,7 @@ public class CarController {
 	}
 
 	@RequestMapping(value = "/list", method = {RequestMethod.GET})
-	public Callable<Iterable<CarDto>> carsByStatus(@RequestParam(required = false, defaultValue = "FOR_SALE") Status status) throws ExecutionException, InterruptedException {
+	public Callable<Iterable<CarDto>> carsByStatus(@RequestParam(required = false, defaultValue = "FOR_SALE") Status status) {
 		return () -> carService.getCarsByStatus(status);
 	}
 
