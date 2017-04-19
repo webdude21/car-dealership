@@ -9,14 +9,11 @@ import eu.webdude.cardealership.domain.factory.CarFactory;
 import eu.webdude.cardealership.repository.CarRepository;
 import eu.webdude.cardealership.repository.ModelRepository;
 import org.springframework.cache.annotation.Cacheable;
-import org.springframework.scheduling.annotation.Async;
-import org.springframework.scheduling.annotation.AsyncResult;
 import org.springframework.stereotype.Service;
 
 import javax.inject.Inject;
 import javax.persistence.EntityNotFoundException;
 import javax.transaction.Transactional;
-import java.util.concurrent.Future;
 import java.util.stream.Collectors;
 
 @Service
@@ -37,12 +34,11 @@ public class CarServiceImpl implements CarService {
 	}
 
 	@Override
-	@Async
 	@Cacheable("getCarsByStatus")
-	public Future<Iterable<CarDto>> getCarsByStatus(Status status) {
-		return new AsyncResult<>(carRepo.findByStatus(status)
+	public Iterable<CarDto> getCarsByStatus(Status status) {
+		return carRepo.findByStatus(status)
 			.map(carFactory::createCarDto)
-			.collect(Collectors.toList()));
+			.collect(Collectors.toList());
 	}
 
 	@Override

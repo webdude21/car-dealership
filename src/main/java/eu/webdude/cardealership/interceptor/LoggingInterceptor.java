@@ -13,6 +13,7 @@ public class LoggingInterceptor extends HandlerInterceptorAdapter {
 
 	private static final Logger log = LoggerFactory.getLogger(LoggingInterceptor.class);
 
+	@Override
 	public void afterCompletion(HttpServletRequest req, HttpServletResponse res, Object handler, Exception ex) throws Exception {
 		log.info(String.format("Resource at %s%s requested by %s", req.getServletPath(), getOptionalParams(req), req.getRemoteHost()));
 	}

@@ -33,15 +33,21 @@ public class CarController {
 	}
 
 	@RequestMapping(value = "/{id}", method = {RequestMethod.PUT})
-	public ResponseEntity<ResponseMessage> editCar(@PathVariable long id, @RequestBody InputCarDto carForCreation) {
-		carService.editCar(id, carForCreation);
+	public ResponseEntity<ResponseMessage> editCar(@PathVariable long id, @RequestBody InputCarDto idForEdit) {
+		carService.editCar(id, idForEdit);
 		return new ResponseEntity<>(new ResponseMessage("Car has been successfully updated."), HttpStatus.ACCEPTED);
 	}
 
 	@RequestMapping(value = "/list", method = {RequestMethod.GET})
 	public Callable<Iterable<CarDto>> carsByStatus(@RequestParam(required = false, defaultValue = "FOR_SALE") Status status) throws ExecutionException, InterruptedException {
-		return () -> carService.getCarsByStatus(status).get();
+		return () -> carService.getCarsByStatus(status);
 	}
+
+	@RequestMapping(value = "/listSync", method = {RequestMethod.GET})
+	public Callable<Iterable<CarDto>> carsByStatusSync(@RequestParam(required = false, defaultValue = "FOR_SALE") Status status) throws ExecutionException, InterruptedException {
+		return () -> carService.getCarsByStatus(status);
+	}
+
 
 	@RequestMapping(value = "/{id}", method = {RequestMethod.DELETE})
 	public ResponseEntity<ResponseMessage> deleteCar(@PathVariable long id) {
