@@ -28,8 +28,8 @@ public class CarController {
 	}
 
 	@RequestMapping(value = "/{id}", method = {RequestMethod.GET})
-	public CarDto getCar(@PathVariable long id) {
-		return carService.getCar(id);
+	public Callable<CarDto> getCar(@PathVariable long id) {
+		return () -> carService.getCar(id);
 	}
 
 	@RequestMapping(value = "/{id}", method = {RequestMethod.PUT})
@@ -42,12 +42,6 @@ public class CarController {
 	public Callable<Iterable<CarDto>> carsByStatus(@RequestParam(required = false, defaultValue = "FOR_SALE") Status status) throws ExecutionException, InterruptedException {
 		return () -> carService.getCarsByStatus(status);
 	}
-
-	@RequestMapping(value = "/listSync", method = {RequestMethod.GET})
-	public Callable<Iterable<CarDto>> carsByStatusSync(@RequestParam(required = false, defaultValue = "FOR_SALE") Status status) throws ExecutionException, InterruptedException {
-		return () -> carService.getCarsByStatus(status);
-	}
-
 
 	@RequestMapping(value = "/{id}", method = {RequestMethod.DELETE})
 	public ResponseEntity<ResponseMessage> deleteCar(@PathVariable long id) {
