@@ -34,10 +34,8 @@ public class LoggingInterceptor extends HandlerInterceptorAdapter implements Asy
 	@Override
 	public void afterCompletion(HttpServletRequest req, HttpServletResponse res, Object handler, Exception ex) throws Exception {
 		HandlerMethod handlerMethod = (HandlerMethod) handler;
-
 		long timeToHandle = (long) req.getAttribute("postHandleTime") - (long) req.getAttribute("preHandleTime");
 		log.info(String.format("Action %s took %d ms to complete!", handlerMethod.getMethod().getName(), timeToHandle));
-		log.info(String.format("Resource at %s%s requested by %s", req.getServletPath(), getOptionalParams(req), req.getRemoteHost()));
 	}
 
 	private String getOptionalParams(HttpServletRequest req) {
