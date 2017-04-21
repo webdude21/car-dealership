@@ -14,6 +14,8 @@ import java.util.Set;
 @Audited
 public class Make extends BaseEntity {
 
+	private static final long serialVersionUID = 1377694459732683079L;
+
 	@OneToMany(mappedBy = "make", targetEntity = Model.class)
 	private Set<Model> models;
 

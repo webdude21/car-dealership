@@ -51,9 +51,9 @@ public class CarController {
 	}
 
 	@RequestMapping(value = "/add", method = {RequestMethod.POST})
-	public ResponseEntity add(@RequestBody InputCarDto carForCreation, UriComponentsBuilder ucBuilder) {
+	public ResponseEntity<?> add(@RequestBody InputCarDto carForCreation, UriComponentsBuilder ucBuilder) {
 		Car createdCar = carService.createCar(carForCreation);
-		return new ResponseEntity(getHttpHeadersForCar(ucBuilder, createdCar), HttpStatus.CREATED);
+		return new ResponseEntity<>(getHttpHeadersForCar(ucBuilder, createdCar), HttpStatus.CREATED);
 	}
 
 	private HttpHeaders getHttpHeadersForCar(UriComponentsBuilder ucBuilder, Car createdCar) {

@@ -12,6 +12,8 @@ import java.time.ZonedDateTime;
 @Audited
 public class Car extends BaseEntity {
 
+	private static final long serialVersionUID = -3032183986891980885L;
+
 	private static final String CAR_YEAR_PRODUCTION_VALIDATION = "Model must not be null, and the car manufacture year should be during the models production period!";
 
 	@Column(name = "manufactured_at")

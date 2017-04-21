@@ -11,6 +11,8 @@ import java.time.ZonedDateTime;
 @Audited
 public class Model extends BaseEntity {
 
+	private static final long serialVersionUID = 2135893366619206315L;
+
 	@Column(name = "name")
 	private String name;
 
