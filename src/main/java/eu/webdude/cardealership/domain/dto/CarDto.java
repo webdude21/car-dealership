@@ -9,6 +9,8 @@ import java.io.Serializable;
 
 public class CarDto implements Serializable {
 
+	private static final long serialVersionUID = 2595743034779912954L;
+
 	private String manufacturedAt;
 
 	private String model;
