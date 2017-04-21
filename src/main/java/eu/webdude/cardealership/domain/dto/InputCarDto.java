@@ -7,6 +7,8 @@ import java.io.Serializable;
 
 public class InputCarDto implements Serializable {
 
+	private static final long serialVersionUID = -2080580449579842278L;
+
 	private int manufacturedAtYear;
 
 	private String modelName;
