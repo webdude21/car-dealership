@@ -43,9 +43,11 @@ public class CarController {
 	}
 
 	@RequestMapping(value = "/{id}", method = {RequestMethod.DELETE})
-	public ResponseEntity<ResponseMessage> deleteCar(@PathVariable long id) {
-		carService.deleteCar(id);
-		return new ResponseEntity<>(new ResponseMessage("Car has been successfully deleted."), HttpStatus.ACCEPTED);
+	public Callable<ResponseEntity<ResponseMessage>> deleteCar(@PathVariable long id) {
+		return () -> {
+			carService.deleteCar(id);
+			return new ResponseEntity<>(new ResponseMessage("Car has been successfully deleted."), HttpStatus.ACCEPTED);
+		};
 	}
 
 	@RequestMapping(value = "/add", method = {RequestMethod.POST})
