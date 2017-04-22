@@ -8,6 +8,7 @@ import eu.webdude.cardealership.domain.entity.Status;
 import eu.webdude.cardealership.domain.factory.CarFactory;
 import eu.webdude.cardealership.repository.CarRepository;
 import eu.webdude.cardealership.repository.ModelRepository;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
@@ -42,6 +43,7 @@ public class CarServiceImpl implements CarService {
 	}
 
 	@Override
+	@CacheEvict(cacheNames = {"getCarsByStatus", "getCarById"}, allEntries = true)
 	public void editCar(long id, InputCarDto editedCar) {
 		checkIfCarExists(id);
 		Model model = modelRepo.findByNameEquals(editedCar.getModelName());
@@ -50,6 +52,7 @@ public class CarServiceImpl implements CarService {
 	}
 
 	@Override
+	@CacheEvict(cacheNames = {"getCarsByStatus", "getCarById"}, allEntries = true)
 	public Car createCar(InputCarDto carForCreation) {
 		Model model = modelRepo.findByNameEquals(carForCreation.getModelName());
 		checkIfModelExists(carForCreation.getModelName(), model);
@@ -64,6 +67,7 @@ public class CarServiceImpl implements CarService {
 	}
 
 	@Override
+	@CacheEvict(cacheNames = {"getCarsByStatus", "getCarById"}, allEntries = true)
 	public void deleteCar(long id) {
 		carRepo.delete(id);
 	}
