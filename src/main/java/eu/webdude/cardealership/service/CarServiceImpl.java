@@ -69,6 +69,7 @@ public class CarServiceImpl implements CarService {
 	@Override
 	@CacheEvict(cacheNames = {"getCarsByStatus", "getCarById"}, allEntries = true)
 	public void deleteCar(long id) {
+		checkIfCarExists(id);
 		carRepo.delete(id);
 	}
 
