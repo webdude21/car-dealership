@@ -17,18 +17,18 @@ public class LoggingInterceptor extends HandlerInterceptorAdapter implements Asy
 	private static final Logger log = LoggerFactory.getLogger(LoggingInterceptor.class);
 
 	@Override
-	public void afterConcurrentHandlingStarted(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-		request.setAttribute("preHandleTime", System.currentTimeMillis());
+	public void afterConcurrentHandlingStarted(HttpServletRequest req, HttpServletResponse res, Object handler) throws Exception {
+		req.setAttribute("preHandleTime", System.currentTimeMillis());
 	}
 
 	@Override
-	public boolean preHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o) throws Exception {
+	public boolean preHandle(HttpServletRequest req, HttpServletResponse res, Object o) throws Exception {
 		return true;
 	}
 
 	@Override
-	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
-		request.setAttribute("postHandleTime", System.currentTimeMillis());
+	public void postHandle(HttpServletRequest req, HttpServletResponse res, Object handler, ModelAndView modelAndView) throws Exception {
+		req.setAttribute("postHandleTime", System.currentTimeMillis());
 	}
 
 	@Override
