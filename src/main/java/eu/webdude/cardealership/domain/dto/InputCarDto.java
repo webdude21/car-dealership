@@ -1,5 +1,6 @@
 package eu.webdude.cardealership.domain.dto;
 
+import eu.webdude.cardealership.constraint.PositiveNumber;
 import eu.webdude.cardealership.domain.entity.Color;
 import eu.webdude.cardealership.domain.entity.Status;
 
@@ -9,12 +10,14 @@ public class InputCarDto implements Serializable {
 
 	private static final long serialVersionUID = -2080580449579842278L;
 
+	@PositiveNumber(message = "The year of manufacturing couldn't really be negative!")
 	private int manufacturedAtYear;
 
 	private String modelName;
 
 	private Color color;
 
+	@PositiveNumber(message = "Odometer reading couldn't really be negative!")
 	private long odometerReading;
 
 	private Status status;

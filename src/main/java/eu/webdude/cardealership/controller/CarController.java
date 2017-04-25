@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import javax.inject.Inject;
+import javax.validation.Valid;
 import java.util.concurrent.Callable;
 
 @RestController
@@ -32,7 +33,7 @@ public class CarController {
 	}
 
 	@RequestMapping(value = "/{id}", method = {RequestMethod.PUT})
-	public ResponseEntity<ResponseMessage> editCar(@PathVariable long id, @RequestBody InputCarDto idForEdit) {
+	public ResponseEntity<ResponseMessage> editCar(@PathVariable long id, @Valid @RequestBody InputCarDto idForEdit) {
 		carService.editCar(id, idForEdit);
 		return new ResponseEntity<>(new ResponseMessage("Car has been successfully updated."), HttpStatus.ACCEPTED);
 	}
@@ -51,7 +52,7 @@ public class CarController {
 	}
 
 	@RequestMapping(value = "/add", method = {RequestMethod.POST})
-	public ResponseEntity<?> add(@RequestBody InputCarDto carForCreation, UriComponentsBuilder ucBuilder) {
+	public ResponseEntity<?> add(@Valid @RequestBody InputCarDto carForCreation, UriComponentsBuilder ucBuilder) {
 		Car createdCar = carService.createCar(carForCreation);
 		return new ResponseEntity<>(getHttpHeadersForCar(ucBuilder, createdCar), HttpStatus.CREATED);
 	}
