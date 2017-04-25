@@ -13,7 +13,7 @@ class ServiceMonitor {
 
 	private static final Logger log = LoggerFactory.getLogger(ServiceMonitor.class);
 
-	@AfterReturning("execution(* eu.webdude.cardealership..*Service*.*(..))")
+	@AfterReturning("execution(* eu.webdude.cardealership.service..*(..))")
 	public void logServiceAccess(JoinPoint joinPoint) {
 		log.info(String.format("Service method: %s called.", joinPoint.getSignature().toShortString()));
 	}
