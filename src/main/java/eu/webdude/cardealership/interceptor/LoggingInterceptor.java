@@ -46,9 +46,4 @@ public class LoggingInterceptor extends HandlerInterceptorAdapter implements Asy
 
 		return String.format("%d ms to complete!", timeToHandle);
 	}
-
-	private String getOptionalParams(HttpServletRequest req) {
-		String queryParams = req.getQueryString();
-		return queryParams != null ? "?" + queryParams : "";
-	}
 }
