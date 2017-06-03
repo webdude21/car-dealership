@@ -27,8 +27,8 @@ public class ConnectedMailSender {
 
 	@JmsListener(destination = "message-queue")
 	public void messageListener(org.springframework.messaging.Message<String> message) {
-		System.out.printf("Message was sent with the following content: %n %s%n", message.getPayload());
 		sendEmail(message.getPayload());
+		System.out.printf("Message was sent with the following content: %n %s%n", message.getPayload());
 	}
 
 	private void sendEmail(String messageBody) {
