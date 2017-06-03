@@ -5,11 +5,13 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cache.annotation.EnableCaching;
+import org.springframework.jms.annotation.EnableJms;
 
 import javax.inject.Inject;
 
 @SpringBootApplication
 @EnableCaching
+@EnableJms
 public class CarDealershipApplication implements CommandLineRunner {
 
 	private final DatabaseSeed databaseSeed;
