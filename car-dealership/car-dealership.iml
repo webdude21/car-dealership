@@ -131,5 +131,6 @@
     <orderEntry type="library" name="Maven: org.hibernate:hibernate-envers:5.0.12.Final" level="project" />
     <orderEntry type="library" name="Maven: org.jboss.logging:jboss-logging:3.3.0.Final" level="project" />
     <orderEntry type="library" name="Maven: org.hibernate:hibernate-java8:5.0.12.Final" level="project" />
+    <orderEntry type="module" module-name="commonmodels" />
   </component>
 </module>

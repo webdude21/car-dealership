@@ -6,10 +6,12 @@ import eu.webdude.cardealership.domain.entity.Car;
 import eu.webdude.cardealership.domain.entity.Model;
 import eu.webdude.cardealership.domain.entity.Status;
 import eu.webdude.cardealership.domain.factory.CarFactory;
+import eu.webdude.cardealership.messaging.JmsTemplateConfig;
 import eu.webdude.cardealership.repository.CarRepository;
 import eu.webdude.cardealership.repository.ModelRepository;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.jms.core.JmsTemplate;
 import org.springframework.stereotype.Service;
 
 import javax.inject.Inject;
@@ -25,12 +27,15 @@ public class CarServiceImpl implements CarService {
 
 	private ModelRepository modelRepo;
 
+	private JmsTemplate jmsTemplate;
+
 	private CarFactory carFactory;
 
 	@Inject
-	public CarServiceImpl(CarRepository carRepo, ModelRepository modelRepo, CarFactory carFactory) {
+	public CarServiceImpl(CarRepository carRepo, ModelRepository modelRepo, JmsTemplate jmsTemplate, CarFactory carFactory) {
 		this.carRepo = carRepo;
 		this.modelRepo = modelRepo;
+		this.jmsTemplate = jmsTemplate;
 		this.carFactory = carFactory;
 	}
 
@@ -63,13 +68,16 @@ public class CarServiceImpl implements CarService {
 	@Cacheable("getCarById")
 	public CarDto getCar(long id) {
 		checkIfCarExists(id);
-		return carFactory.createCarDto(carRepo.findOne(id));
+		CarDto carDto = carFactory.createCarDto(carRepo.findOne(id));
+		jmsTemplate.convertAndSend("car-queue", carFactory.createMessageDto(carDto));
+		return carDto;
 	}
 
 	@Override
 	@CacheEvict(cacheNames = {"getCarsByStatus", "getCarById"}, allEntries = true)
 	public void deleteCar(long id) {
 		checkIfCarExists(id);
+		postCarDeleteMessage(id);
 		carRepo.delete(id);
 	}
 
@@ -83,5 +91,9 @@ public class CarServiceImpl implements CarService {
 		if (!carRepo.exists(id)) {
 			throw new EntityNotFoundException(String.format("No car with id '%d' can be found", id));
 		}
+	}
+
+	private void postCarDeleteMessage(long carId) {
+		jmsTemplate.convertAndSend(JmsTemplateConfig.QUEUE, String.format("Deleted car with id: %d", carId));
 	}
 }

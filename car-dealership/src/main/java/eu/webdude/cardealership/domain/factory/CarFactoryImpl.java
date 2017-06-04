@@ -1,5 +1,6 @@
 package eu.webdude.cardealership.domain.factory;
 
+import eu.webdude.CarMessageDto;
 import eu.webdude.cardealership.domain.dto.CarDto;
 import eu.webdude.cardealership.domain.dto.InputCarDto;
 import eu.webdude.cardealership.domain.entity.Car;
@@ -49,5 +50,10 @@ public class CarFactoryImpl implements CarFactory {
 	@Override
 	public Model createModel(String modelName, Make make, int productionStartYear, int productionEndYear) {
 		return new Model(modelName, make, productionStartYear, productionEndYear);
+	}
+
+	@Override
+	public CarMessageDto createMessageDto(CarDto carDto) {
+		return new CarMessageDto(carDto.getManufacturedAt(), carDto.getModel(), carDto.getOdometerReading(), carDto.getMake());
 	}
 }
